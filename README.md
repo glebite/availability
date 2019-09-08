@@ -25,3 +25,7 @@ Someone will want to use chrome, safari, whatever - this has been developed on m
 As well, it might be handy to have the retrieval feed into some sort of simple database, alert to only new "bookable" devices/changes.  This could be wrapped up and entered into a cron job and get immediate updates.
 
 But not for now.
+
+Comment:  
+========  
+Just used it - secured a booking today!  Awesome power of automation!
