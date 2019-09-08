@@ -1,9 +1,10 @@
 #!/usr/bin/python
+import time
+import getopt
+import sys
+import ast
 from selenium import webdriver
 from bs4 import BeautifulSoup
-import time
-import getopt, sys
-import ast
 
 
 class Availability:
@@ -62,6 +63,7 @@ class Availability:
                         tds_soup = BeautifulSoup(row.get_attribute('innerHTML'), 'lxml')
                         td_fields = tds_soup.find_all('td')
                         print("\t{} to {}".format(td_fields[1].text, td_fields[2].text))
+                        
 def usage():
     print("python ./availability.py -u barcode -p pin -n nodes")
 
@@ -76,13 +78,13 @@ def main():
     password = None
     nodes = None
 
-    for o, a in opts:
-        if o == "-u":
-            username = a
-        elif o == "-p":
-            password = a
-        elif o == "-n":
-            nodes = a
+    for option_tag, arg_tag in opts:
+        if option_tag == "-u":
+            username = arg_tag
+        elif option_tag == "-p":
+            password = arg_tag
+        elif option_tag == "-n":
+            nodes = arg_tag
         else:
             assert False, "unhandled option"
 
@@ -93,5 +95,5 @@ def main():
         ott_library.get_availability(each_node)
     ott_library.close()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
