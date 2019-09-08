@@ -37,10 +37,11 @@ class Availability:
         self.web_driver.find_element_by_xpath('//button[contains(text(), "{}")]'.format(self.login_button_text)).click()
         time.sleep(2)
         self.web_driver.find_element_by_xpath('//a[contains(text(), "{}")]'.format(self.login_register_button_text)).click()
-        time.sleep(1)
+        time.sleep(2)
         self.web_driver.find_element_by_id(self.user_name_id).send_keys(self.user_barcode)
         self.web_driver.find_element_by_id(self.user_pin_id).send_keys(self.user_pin)
         self.web_driver.find_element_by_name(self.user_login_button_name).click()
+        time.sleep(2)
         
     def get_availability(self, node_id):
         print('Machine: {}'.format(node_id))
@@ -83,7 +84,6 @@ def main():
         else:
             assert False, "unhandled option"
 
-    print(username, password, nodes)
     ott_library = Availability(username, password, nodes)
     ott_library.connect()
     ott_library.login()
