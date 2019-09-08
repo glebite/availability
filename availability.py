@@ -62,6 +62,8 @@ class Availability:
                         tds_soup = BeautifulSoup(row.get_attribute('innerHTML'), 'lxml')
                         td_fields = tds_soup.find_all('td')
                         print("\t{} to {}".format(td_fields[1].text, td_fields[2].text))
+def usage():
+    print("python ./availability.py -u barcode -p pin -n nodes")
 
 def main():
     try:
