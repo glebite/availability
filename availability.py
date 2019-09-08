@@ -26,7 +26,7 @@ class Availability:
 
     def __init__(self, user_name, user_pin, nodes):
         """
-        __init__ - TBD
+        __init__ - let's spark this up!
         """
         self.firefox_profile = webdriver.FirefoxProfile()
         self.web_driver = webdriver.Firefox(firefox_profile=self.firefox_profile)
@@ -37,19 +37,20 @@ class Availability:
 
     def connect(self):
         """
-        TBD
+        connect - strangely doesn't connect at times.  Might put in some other
+                  magic code for later to check this.  Might not...
         """
         self.web_driver.get(self.base_url)
 
     def close(self):
         """
-        TBD
+        close - quit the drivers
         """
         self.web_driver.quit()
 
     def login(self):
         """
-        TBD
+        login - login function - barcode, pin, press buttton
         """
         xpath_match = '//button[contains(text(), "{}")]'
         self.web_driver.find_element_by_xpath(xpath_match.
@@ -66,7 +67,7 @@ class Availability:
 
     def get_availability(self, node_id):
         """
-        TBD
+        get_availability - navigate to the page, parse tables, dump to screen
         """
         print('Machine: {}'.format(node_id))
         self.web_driver.get(self.base_url + self.node_modifier + node_id + "/schedule")
@@ -91,13 +92,13 @@ class Availability:
 
 def usage():
     """
-    TBD
+    Basic usage - output how to use this tool.
     """
     print("python ./availability.py -u barcode -p pin -n nodes")
 
 def main():
     """
-    TBD
+    main function - parse options, create instance, and do it!
     """
     try:
         opts, _ = getopt.gnu_getopt(sys.argv[1:], "u:p:n:", ["user", "password", "nodes"])
