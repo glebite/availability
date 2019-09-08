@@ -69,6 +69,7 @@ class Availability:
         """
         get_availability - navigate to the page, parse tables, dump to screen
         """
+        found_rows = False
         print('Machine: {}'.format(node_id))
         self.web_driver.get(self.base_url + self.node_modifier + node_id + "/schedule")
         xpath_match = '//a[contains(text(), "{}")]'
@@ -83,12 +84,17 @@ class Availability:
                 xpath_match = './/tr[@class="form-opl-booking-row-available"]'
                 available_rows = table.find_elements_by_xpath(xpath_match)
                 if available_rows:
+                    found_rows = True
                     if caption:
                         print(caption.contents[0])
                     for row in available_rows:
                         tds_soup = BeautifulSoup(row.get_attribute('innerHTML'), 'lxml')
                         td_fields = tds_soup.find_all('td')
                         print("\t{} to {}".format(td_fields[1].text, td_fields[2].text))
+                else:
+                    found_rows = False
+        if not found_rows:
+            print("\tNone Found")
 
 def usage():
     """
