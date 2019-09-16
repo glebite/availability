@@ -14,11 +14,11 @@ class Availability:
     """
     Availability class - TBD
     """
+    # TODO: move locators up here too!  Should clean things up.
     base_url = "https://biblioottawalibrary.ca"
     node_modifier = "/en/node/"
     login_button_text = "Log In "
     login_register_button_text = "Log In / Register"
-
     user_name_id = "user_name"
     user_pin_id = "user_pin"
     user_login_button_name = "commit"
@@ -55,15 +55,15 @@ class Availability:
         xpath_match = '//button[contains(text(), "{}")]'
         self.web_driver.find_element_by_xpath(xpath_match.
                                               format(self.login_button_text)).click()
-        time.sleep(2)
+        time.sleep(5)
         xpath_match = '//a[contains(text(), "{}")]'
         self.web_driver.find_element_by_xpath(xpath_match.
                                               format(self.login_register_button_text)).click()
-        time.sleep(2)
+        time.sleep(5)
         self.web_driver.find_element_by_id(self.user_name_id).send_keys(self.user_barcode)
         self.web_driver.find_element_by_id(self.user_pin_id).send_keys(self.user_pin)
         self.web_driver.find_element_by_name(self.user_login_button_name).click()
-        time.sleep(2)
+        time.sleep(5)
 
     def get_availability(self, node_id):
         """
