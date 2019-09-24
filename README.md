@@ -26,6 +26,10 @@ As well, it might be handy to have the retrieval feed into some sort of simple d
 
 But not for now.
 
+Also - needs better handling on a slow network link.  
+
 Comment:  
 ========  
 Just used it - secured a booking today!  Awesome power of automation!
+
+Running this tool in the library has proven to be annoying - ran it and it was so slow.
