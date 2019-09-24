@@ -14,7 +14,6 @@ class Availability:
     """
     Availability class - TBD
     """
-    # TODO: move locators up here too!  Should clean things up.
     base_url = "https://biblioottawalibrary.ca"
     node_modifier = "/en/node/"
     login_button_text = "Log In "
@@ -23,6 +22,8 @@ class Availability:
     user_pin_id = "user_pin"
     user_login_button_name = "commit"
     availability_link_text = "View availability for the next 6 days"
+
+    login_xpath_match = '//button[contains(text(), "{}")]'
 
     def __init__(self, user_name, user_pin, nodes):
         """
@@ -52,8 +53,8 @@ class Availability:
         """
         login - login function - barcode, pin, press buttton
         """
-        xpath_match = '//button[contains(text(), "{}")]'
-        self.web_driver.find_element_by_xpath(xpath_match.
+
+        self.web_driver.find_element_by_xpath(self.login_xpath_match.
                                               format(self.login_button_text)).click()
         time.sleep(5)
         xpath_match = '//a[contains(text(), "{}")]'
