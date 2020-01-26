@@ -18,10 +18,10 @@ class Availability:
     node_modifier = "/en/node/"
     login_button_text = "Log In "
     login_register_button_text = "Log In / Register"
-    user_name_id = "user_name"
-    user_pin_id = "user_pin"
-    user_login_button_name = "commit"
-    availability_link_text = "View availability for the next 6 days"
+    user_name_id = "edit-name"
+    user_pin_id = "edit-user-pin"
+    user_login_button_name = "edit-submit"
+    availability_link_text = "future-availability-body"
 
     login_xpath_match = '//button[contains(text(), "{}")]'
 
@@ -58,12 +58,13 @@ class Availability:
                                               format(self.login_button_text)).click()
         time.sleep(5)
         xpath_match = '//a[contains(text(), "{}")]'
+
         self.web_driver.find_element_by_xpath(xpath_match.
                                               format(self.login_register_button_text)).click()
         time.sleep(5)
         self.web_driver.find_element_by_id(self.user_name_id).send_keys(self.user_barcode)
         self.web_driver.find_element_by_id(self.user_pin_id).send_keys(self.user_pin)
-        self.web_driver.find_element_by_name(self.user_login_button_name).click()
+        self.web_driver.find_element_by_id(self.user_login_button_name).click()
         time.sleep(5)
 
     def get_availability(self, node_id):
@@ -73,7 +74,7 @@ class Availability:
         found_rows = False
         print('Machine: {}'.format(node_id))
         self.web_driver.get(self.base_url + self.node_modifier + node_id + "/schedule")
-        xpath_match = '//a[contains(text(), "{}")]'
+        xpath_match = '//a[contains(@href, "{}")]'
         self.web_driver.find_element_by_xpath(xpath_match.
                                               format(self.availability_link_text)).click()
 
