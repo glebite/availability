@@ -57,14 +57,17 @@ class Availability:
         self.web_driver.find_element_by_xpath(self.login_xpath_match.
                                               format(self.login_button_text)).click()
         time.sleep(5)
+        # TODO: change this up to the top
         xpath_match = '//a[contains(text(), "{}")]'
 
         self.web_driver.find_element_by_xpath(xpath_match.
                                               format(self.login_register_button_text)).click()
+        # TODO: replace with element availability (reducing time)
         time.sleep(5)
         self.web_driver.find_element_by_id(self.user_name_id).send_keys(self.user_barcode)
         self.web_driver.find_element_by_id(self.user_pin_id).send_keys(self.user_pin)
         self.web_driver.find_element_by_id(self.user_login_button_name).click()
+        # TODO: replace with element availability (reducint time)
         time.sleep(5)
 
     def get_availability(self, node_id):
@@ -74,15 +77,18 @@ class Availability:
         found_rows = False
         print('Machine: {}'.format(node_id))
         self.web_driver.get(self.base_url + self.node_modifier + node_id + "/schedule")
+        # TODO: move it all up!!!
         xpath_match = '//a[contains(@href, "{}")]'
         self.web_driver.find_element_by_xpath(xpath_match.
                                               format(self.availability_link_text)).click()
 
+        # TODO: move it up!
         available_tables = self.web_driver.find_elements_by_xpath('//table')
         for table in available_tables:
             if table:
                 table_soup = BeautifulSoup(table.get_attribute('innerHTML'), 'lxml')
                 caption = table_soup.find('caption')
+                # TODO: move this up too!  ugly!!!
                 xpath_match = './/tr[@class="form-opl-booking-row-available"]'
                 available_rows = table.find_elements_by_xpath(xpath_match)
                 if available_rows:
